@@ -465,7 +465,7 @@ Apache License 2.0 - see [LICENSE](LICENSE) file for details
 **External**
 
 - [ERC-8004 Specification](https://eips.ethereum.org/EIPS/eip-8004)
-- [GitHub Repository](https://github.com/your-org/clawpass)
+- [GitHub Repository](https://github.com/ch4r10t33r/clawpass)
 - [Documentation](https://clawpass.dev)
 
 ## Support
