@@ -9,7 +9,7 @@
  * @see https://docs.openclaw.ai/plugins/agent-tools
  */
 
-import { ClawpassClient, toFixedPoint, calculateHash } from 'clawpass';
+import { ClawpassClient, toFixedPoint, calculateHash } from '@ch4r10t33r/clawpass';
 import { ethers } from 'ethers';
 
 type Api = {

@@ -19,7 +19,7 @@ Clawpass is a modular TypeScript/JavaScript library that provides a complete int
 ## Installation
 
 ```bash
-npm install clawpass ethers
+npm install @ch4r10t33r/clawpass ethers
 ```
 
 ## Quick Start
@@ -28,7 +28,7 @@ For a short walkthrough, see [QUICKSTART.md](QUICKSTART.md). For a fuller introd
 
 ```typescript
 import { ethers } from 'ethers';
-import { ClawpassClient } from 'clawpass';
+import { ClawpassClient } from '@ch4r10t33r/clawpass';
 
 // Setup provider and signer
 const provider = new ethers.JsonRpcProvider('YOUR_RPC_URL');
@@ -96,7 +96,7 @@ The Validation Registry provides hooks for independent validators to verify task
 ### Register an Agent
 
 ```typescript
-import { createDataURI } from 'clawpass';
+import { createDataURI } from '@ch4r10t33r/clawpass';
 
 const registrationFile = {
   type: 'https://eips.ethereum.org/EIPS/eip-8004#registration-v1',
@@ -123,7 +123,7 @@ const agentId = await clawpass.identity.register(agentURI);
 ### Give Feedback
 
 ```typescript
-import { toFixedPoint } from 'clawpass';
+import { toFixedPoint } from '@ch4r10t33r/clawpass';
 
 await clawpass.reputation.giveFeedback({
   agentId: 1n,
@@ -154,7 +154,7 @@ console.log(`Count: ${reputation.summary.count}`);
 ### Request Validation
 
 ```typescript
-import { calculateHash } from 'clawpass';
+import { calculateHash } from '@ch4r10t33r/clawpass';
 
 const requestData = JSON.stringify({
   task: 'Verify analysis',
@@ -189,7 +189,7 @@ Clawpass works as an [OpenClaw](https://docs.openclaw.ai/) plugin so agents can 
 From npm:
 
 ```bash
-openclaw plugins install clawpass
+openclaw plugins install @ch4r10t33r/clawpass
 ```
 
 From a local path (development; run `npm run build` in the clawpass directory first):
@@ -461,6 +461,7 @@ Apache License 2.0 - see [LICENSE](LICENSE) file for details
 - [CONTRIBUTING.md](CONTRIBUTING.md) — How to contribute
 - [CHANGELOG.md](CHANGELOG.md) — Version history
 - [PROJECT_SUMMARY.md](PROJECT_SUMMARY.md) — Project overview
+- [PUBLISHING.md](PUBLISHING.md) — How to publish to npm
 
 **External**
 

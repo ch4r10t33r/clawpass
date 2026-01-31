@@ -1,6 +1,13 @@
 {
-  "name": "clawpass",
+  "name": "@ch4r10t33r/clawpass",
   "version": "1.0.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ch4r10t33r/clawpass.git"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  },
   "description": "ERC-8004 interface module for AI agent identity, reputation, and validation on blockchain",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
