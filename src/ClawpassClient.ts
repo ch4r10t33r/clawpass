@@ -43,7 +43,9 @@ export class ClawpassClient {
    * Verify that reputation and validation registries are linked to the identity registry
    */
   async verifyRegistryLinks(): Promise<boolean> {
-    const identityAddress = this.identity['contract'].target;
+    const raw = this.identity['contract'].target;
+    const identityAddress =
+      typeof raw === 'string' ? raw : (raw as unknown as { address: string }).address;
     const reputationIdentity = await this.reputation.getIdentityRegistry();
     const validationIdentity = await this.validation.getIdentityRegistry();
 

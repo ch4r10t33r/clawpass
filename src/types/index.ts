@@ -50,7 +50,7 @@ export interface FeedbackData {
 }
 
 export interface FeedbackRecord {
-  agentId: number;
+  agentId: bigint;
   clientAddress: string;
   feedbackIndex: bigint;
   value: bigint;
