@@ -1,68 +1,78 @@
-# Publishing to GitHub Packages
+# Publishing to npm
 
-The package is published as **@ch4r10t33r/clawpass** to [GitHub Packages](https://github.com/ch4r10t33r/clawpass/packages).
+The package is published as **@ch4r10teer41/clawpass** at [npmjs.com/package/@ch4r10teer41/clawpass](https://www.npmjs.com/package/@ch4r10teer41/clawpass).
 
 ## Option A: Publish via GitHub Release (automated)
 
-1. **Create a release** on GitHub:
+1. **Add NPM_TOKEN to GitHub secrets** (one-time):
+   - Go to [npmjs.com](https://www.npmjs.com/) → Account → Access Tokens → Generate New Token
+   - Choose "Automation" or "Publish" token
+   - In your repo: Settings → Secrets and variables → Actions → New repository secret
+   - Name: `NPM_TOKEN`, Value: your npm token
+
+2. **Create a release** on GitHub:
    - Go to [Releases](https://github.com/ch4r10t33r/clawpass/releases)
    - Click "Create a new release"
-   - Choose a tag (e.g. `v1.0.0`)
+   - Choose a tag (e.g. `v1.0.2`)
    - Publish the release
 
-2. The **Publish to GitHub Packages** workflow runs automatically and publishes the package.
-
-No manual publish needed. The workflow uses `GITHUB_TOKEN` (built-in secret).
+3. The **Publish to npm** workflow runs and publishes to registry.npmjs.org.
 
 ## Option B: Publish manually
 
-1. **Create a Personal Access Token** (PAT):
-   - GitHub → Settings → Developer settings → Personal access tokens
-   - New token with `write:packages` and `read:packages`
+npm requires **2FA or an Automation token** for publishing.
 
-2. **Log in to GitHub Packages**:
-   ```bash
-   npm login --registry=https://npm.pkg.github.com
-   ```
-   - Username: your GitHub username
-   - Password: your PAT (not your GitHub password)
-   - Email: your email
+### Using an Automation token (recommended)
 
-3. **Build and publish**:
+1. **Create a token** at [npmjs.com](https://www.npmjs.com/) → Account → Access Tokens → Generate New Token
+2. Choose **"Automation"** (bypasses 2FA for scripts)
+3. **Publish**:
    ```bash
    npm run build
+   npm publish --access public
+   ```
+   With token in env:
+   ```bash
+   export NPM_TOKEN=your_automation_token
+   echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" >> ~/.npmrc
    npm publish
    ```
+   Or add to `~/.npmrc`:
+   ```
+   //registry.npmjs.org/:_authToken=YOUR_TOKEN
+   ```
 
-The project `.npmrc` already configures `@ch4r10t33r` to use the GitHub Packages registry.
+### Using npm login + 2FA
+
+1. **Enable 2FA** on npm if not already (Account → Security)
+2. **Log in**:
+   ```bash
+   npm login
+   ```
+   Username: ch4r10teer41, password, email
+3. **Publish** (you'll be prompted for OTP):
+   ```bash
+   npm run build
+   npm publish --access public
+   ```
 
 ## Install after publishing
 
-Users must point npm at GitHub Packages for this scope. Add to their project `.npmrc` (or `~/.npmrc`):
-
-```
-@ch4r10t33r:registry=https://npm.pkg.github.com
-//npm.pkg.github.com/:_authToken=${GITHUB_TOKEN}
-```
-
-Then (with `GITHUB_TOKEN` set to a PAT with `read:packages`):
+Users install with:
 
 ```bash
-npm install @ch4r10t33r/clawpass ethers
+npm install @ch4r10teer41/clawpass ethers
 ```
 
-Or for public packages, anonymous read may work if the package is public; otherwise a PAT is required.
+No special registry config needed; the package is on the public npm registry.
 
 ## OpenClaw plugin install
 
 ```bash
-openclaw plugins install @ch4r10t33r/clawpass
+openclaw plugins install @ch4r10teer41/clawpass
 ```
-
-Ensure the OpenClaw/npm environment has `@ch4r10t33r` scoped to GitHub Packages and a valid auth token if the package is private.
 
 ## Troubleshooting
 
-- **403 Forbidden**: Check PAT has `write:packages` (publish) or `read:packages` (install).
+- **403 Forbidden**: Log in with `npm login`; ensure you own the @ch4r10teer41 scope on npm.
 - **Nothing to publish**: Run `npm run build` so `dist/` exists.
-- **Package not found (install)**: Add `.npmrc` with scope and auth token; ensure the package is published and accessible.

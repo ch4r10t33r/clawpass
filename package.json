@@ -1,12 +1,13 @@
 {
-  "name": "@ch4r10t33r/clawpass",
+  "name": "@ch4r10teer41/clawpass",
   "version": "1.0.1",
   "repository": {
     "type": "git",
-    "url": "https://github.com/ch4r10t33r/clawpass.git"
+    "url": "git+https://github.com/ch4r10t33r/clawpass.git"
   },
   "publishConfig": {
-    "registry": "https://npm.pkg.github.com"
+    "registry": "https://registry.npmjs.org/",
+    "access": "public"
   },
   "description": "ERC-8004 interface module for AI agent identity, reputation, and validation on blockchain",
   "main": "dist/index.js",
@@ -14,13 +15,15 @@
   "types": "dist/index.d.ts",
   "exports": {
     ".": {
+      "types": "./dist/index.d.ts",
       "import": "./dist/index.mjs",
-      "require": "./dist/index.js",
-      "types": "./dist/index.d.ts"
+      "require": "./dist/index.js"
     }
   },
   "openclaw": {
-    "extensions": ["./openclaw-plugin.ts"]
+    "extensions": [
+      "./openclaw-plugin.ts"
+    ]
   },
   "scripts": {
     "build": "tsup src/index.ts --format cjs,esm --dts",

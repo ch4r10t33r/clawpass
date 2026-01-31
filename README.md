@@ -1,5 +1,7 @@
 # Clawpass
 
+[![npm version](https://img.shields.io/npm/v/@ch4r10teer41/clawpass.svg)](https://www.npmjs.com/package/@ch4r10teer41/clawpass)
+
 **ERC-8004 Interface Module for AI Agents on Blockchain**
 
 Clawpass is a modular TypeScript/JavaScript library that provides a complete interface to the ERC-8004 Trustless Agents protocol. It enables AI agents to establish decentralized identity, accumulate verifiable reputation, and validate their work through blockchain-based registries.
@@ -18,8 +20,10 @@ Clawpass is a modular TypeScript/JavaScript library that provides a complete int
 
 ## Installation
 
+Install from the public npm registry:
+
 ```bash
-npm install @ch4r10t33r/clawpass ethers
+npm install @ch4r10teer41/clawpass ethers
 ```
 
 ## Quick Start
@@ -28,7 +32,7 @@ For a short walkthrough, see [QUICKSTART.md](QUICKSTART.md). For a fuller introd
 
 ```typescript
 import { ethers } from 'ethers';
-import { ClawpassClient } from '@ch4r10t33r/clawpass';
+import { ClawpassClient } from '@ch4r10teer41/clawpass';
 
 // Setup provider and signer
 const provider = new ethers.JsonRpcProvider('YOUR_RPC_URL');
@@ -96,7 +100,7 @@ The Validation Registry provides hooks for independent validators to verify task
 ### Register an Agent
 
 ```typescript
-import { createDataURI } from '@ch4r10t33r/clawpass';
+import { createDataURI } from '@ch4r10teer41/clawpass';
 
 const registrationFile = {
   type: 'https://eips.ethereum.org/EIPS/eip-8004#registration-v1',
@@ -123,7 +127,7 @@ const agentId = await clawpass.identity.register(agentURI);
 ### Give Feedback
 
 ```typescript
-import { toFixedPoint } from '@ch4r10t33r/clawpass';
+import { toFixedPoint } from '@ch4r10teer41/clawpass';
 
 await clawpass.reputation.giveFeedback({
   agentId: 1n,
@@ -154,7 +158,7 @@ console.log(`Count: ${reputation.summary.count}`);
 ### Request Validation
 
 ```typescript
-import { calculateHash } from '@ch4r10t33r/clawpass';
+import { calculateHash } from '@ch4r10teer41/clawpass';
 
 const requestData = JSON.stringify({
   task: 'Verify analysis',
@@ -189,7 +193,7 @@ Clawpass works as an [OpenClaw](https://docs.openclaw.ai/) plugin so agents can 
 From npm:
 
 ```bash
-openclaw plugins install @ch4r10t33r/clawpass
+openclaw plugins install @ch4r10teer41/clawpass
 ```
 
 From a local path (development; run `npm run build` in the clawpass directory first):
@@ -465,6 +469,7 @@ Apache License 2.0 - see [LICENSE](LICENSE) file for details
 
 **External**
 
+- [npm package](https://www.npmjs.com/package/@ch4r10teer41/clawpass) — `@ch4r10teer41/clawpass`
 - [ERC-8004 Specification](https://eips.ethereum.org/EIPS/eip-8004)
 - [GitHub Repository](https://github.com/ch4r10t33r/clawpass)
 - [Documentation](https://clawpass.dev)
