@@ -1,0 +1,132 @@
+[
+  {
+    "type": "function",
+    "name": "register",
+    "inputs": [
+      { "name": "agentURI", "type": "string" },
+      {
+        "name": "metadata",
+        "type": "tuple[]",
+        "components": [
+          { "name": "metadataKey", "type": "string" },
+          { "name": "metadataValue", "type": "bytes" }
+        ]
+      }
+    ],
+    "outputs": [{ "name": "agentId", "type": "uint256" }],
+    "stateMutability": "nonpayable"
+  },
+  {
+    "type": "function",
+    "name": "register",
+    "inputs": [{ "name": "agentURI", "type": "string" }],
+    "outputs": [{ "name": "agentId", "type": "uint256" }],
+    "stateMutability": "nonpayable"
+  },
+  {
+    "type": "function",
+    "name": "register",
+    "inputs": [],
+    "outputs": [{ "name": "agentId", "type": "uint256" }],
+    "stateMutability": "nonpayable"
+  },
+  {
+    "type": "function",
+    "name": "setAgentURI",
+    "inputs": [
+      { "name": "agentId", "type": "uint256" },
+      { "name": "newURI", "type": "string" }
+    ],
+    "outputs": [],
+    "stateMutability": "nonpayable"
+  },
+  {
+    "type": "function",
+    "name": "tokenURI",
+    "inputs": [{ "name": "tokenId", "type": "uint256" }],
+    "outputs": [{ "name": "", "type": "string" }],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "getMetadata",
+    "inputs": [
+      { "name": "agentId", "type": "uint256" },
+      { "name": "metadataKey", "type": "string" }
+    ],
+    "outputs": [{ "name": "", "type": "bytes" }],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "setMetadata",
+    "inputs": [
+      { "name": "agentId", "type": "uint256" },
+      { "name": "metadataKey", "type": "string" },
+      { "name": "metadataValue", "type": "bytes" }
+    ],
+    "outputs": [],
+    "stateMutability": "nonpayable"
+  },
+  {
+    "type": "function",
+    "name": "getAgentWallet",
+    "inputs": [{ "name": "agentId", "type": "uint256" }],
+    "outputs": [{ "name": "", "type": "address" }],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "setAgentWallet",
+    "inputs": [
+      { "name": "agentId", "type": "uint256" },
+      { "name": "newWallet", "type": "address" },
+      { "name": "deadline", "type": "uint256" },
+      { "name": "signature", "type": "bytes" }
+    ],
+    "outputs": [],
+    "stateMutability": "nonpayable"
+  },
+  {
+    "type": "function",
+    "name": "unsetAgentWallet",
+    "inputs": [{ "name": "agentId", "type": "uint256" }],
+    "outputs": [],
+    "stateMutability": "nonpayable"
+  },
+  {
+    "type": "function",
+    "name": "ownerOf",
+    "inputs": [{ "name": "tokenId", "type": "uint256" }],
+    "outputs": [{ "name": "", "type": "address" }],
+    "stateMutability": "view"
+  },
+  {
+    "type": "event",
+    "name": "Registered",
+    "inputs": [
+      { "name": "agentId", "type": "uint256", "indexed": true },
+      { "name": "agentURI", "type": "string", "indexed": false },
+      { "name": "owner", "type": "address", "indexed": true }
+    ]
+  },
+  {
+    "type": "event",
+    "name": "URIUpdated",
+    "inputs": [
+      { "name": "agentId", "type": "uint256", "indexed": true },
+      { "name": "newURI", "type": "string", "indexed": false },
+      { "name": "updatedBy", "type": "address", "indexed": true }
+    ]
+  },
+  {
+    "type": "event",
+    "name": "MetadataSet",
+    "inputs": [
+      { "name": "agentId", "type": "uint256", "indexed": true },
+      { "name": "indexedMetadataKey", "type": "string", "indexed": true },
+      { "name": "metadataKey", "type": "string", "indexed": false },
+      { "name": "metadataValue", "type": "bytes", "indexed": false }
+    ]
+  }
+]

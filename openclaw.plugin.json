@@ -1,0 +1,64 @@
+{
+  "id": "clawpass",
+  "name": "Clawpass",
+  "description": "ERC-8004 interface: agent identity, reputation, and validation on blockchain. Register agents, give/query feedback, request validation.",
+  "version": "1.0.0",
+  "kind": "tools",
+  "configSchema": {
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+      "rpcUrl": {
+        "type": "string",
+        "description": "EVM JSON-RPC URL (e.g. Alchemy, Infura)"
+      },
+      "identityRegistryAddress": {
+        "type": "string",
+        "description": "ERC-8004 Identity Registry contract address"
+      },
+      "reputationRegistryAddress": {
+        "type": "string",
+        "description": "ERC-8004 Reputation Registry contract address"
+      },
+      "validationRegistryAddress": {
+        "type": "string",
+        "description": "ERC-8004 Validation Registry contract address"
+      },
+      "privateKey": {
+        "type": "string",
+        "description": "Optional wallet private key for write operations (register, give feedback, validation request)"
+      },
+      "chainId": {
+        "type": "number",
+        "description": "Chain ID (e.g. 1 for mainnet)"
+      }
+    },
+    "required": ["rpcUrl", "identityRegistryAddress", "reputationRegistryAddress", "validationRegistryAddress"]
+  },
+  "uiHints": {
+    "rpcUrl": {
+      "label": "RPC URL",
+      "placeholder": "https://eth-mainnet.g.alchemy.com/v2/YOUR_KEY"
+    },
+    "identityRegistryAddress": {
+      "label": "Identity Registry Address",
+      "placeholder": "0x..."
+    },
+    "reputationRegistryAddress": {
+      "label": "Reputation Registry Address",
+      "placeholder": "0x..."
+    },
+    "validationRegistryAddress": {
+      "label": "Validation Registry Address",
+      "placeholder": "0x..."
+    },
+    "privateKey": {
+      "label": "Private Key (optional)",
+      "sensitive": true
+    },
+    "chainId": {
+      "label": "Chain ID",
+      "placeholder": "1"
+    }
+  }
+}
