@@ -2,7 +2,7 @@
   "id": "clawpass",
   "name": "Clawpass",
   "description": "ERC-8004 interface: agent identity, reputation, and validation on blockchain. Register agents, give/query feedback, request validation.",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "kind": "tools",
   "configSchema": {
     "type": "object",

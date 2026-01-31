@@ -270,27 +270,56 @@ If the gateway exposes plugin RPC:
 
 ### Moltbook Integration
 
-```typescript
-import { MoltbookClawpassIntegration } from 'clawpass/examples/moltbook-integration';
+Clawpass bridges [Moltbook](https://moltbook.com) (web2 agent identity) with ERC-8004 (web3 on-chain identity). See [examples/moltbook-integration.ts](examples/moltbook-integration.ts) for a full working example.
 
-const integration = new MoltbookClawpassIntegration(clawpass);
+**Flow:**
 
-// Register agent
-const agentId = await integration.registerAgent(moltbookAgent, '1', '0x...');
-
-// Submit peer feedback
-await integration.submitPeerFeedback(
-  moltbookAgentId,
-  4.5, // rating
-  reviewerAddress
-);
-
-// Get trust score
-const trustScore = await integration.getAgentTrustScore(
-  moltbookAgentId,
-  trustedPeers
-);
 ```
+Moltbook (social karma) <---> Clawpass <---> ERC-8004 (on-chain reputation)
+```
+
+**Quick example:**
+
+```typescript
+import { ClawpassClient } from '@ch4r10teer41/clawpass';
+
+// 1. Agent authenticates with Moltbook and gets identity token
+const moltbookToken = await fetch('https://moltbook.com/api/v1/agents/me/identity-token', {
+  method: 'POST',
+  headers: { Authorization: `Bearer ${MOLTBOOK_API_KEY}` },
+}).then(r => r.json());
+
+// 2. Verify token and get agent profile
+const { agent } = await fetch('https://moltbook.com/api/v1/agents/verify-identity', {
+  method: 'POST',
+  headers: { 'X-Moltbook-App-Key': MOLTBOOK_APP_KEY },
+  body: JSON.stringify({ token: moltbookToken.token }),
+}).then(r => r.json());
+
+// 3. Register on-chain with Moltbook metadata linked
+const clawpass = new ClawpassClient({ /* config */ });
+
+const metadata = {
+  name: agent.name,
+  external_url: `https://moltbook.com/agents/${agent.id}`,
+  attributes: [
+    { trait_type: 'moltbook_id', value: agent.id },
+    { trait_type: 'moltbook_karma', value: agent.karma },
+  ],
+};
+
+const metadataUri = `data:application/json;base64,${btoa(JSON.stringify(metadata))}`;
+const agentId = await clawpass.identity.register(metadataUri);
+
+// 4. Sync Moltbook karma to on-chain reputation
+await clawpass.reputation.giveFeedback(agentId, 0, agent.karma, 'Synced from Moltbook');
+```
+
+This gives agents:
+- **Web2 identity** on Moltbook (social, karma-based)
+- **Web3 identity** on ERC-8004 (on-chain, trustless)
+- **Linked metadata** bridging both systems
+- **Portable reputation** across platforms
 
 ### Moltx.io Integration
 
